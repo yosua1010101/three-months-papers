@@ -1,0 +1,23 @@
+{
+  "name": "three-months-papers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yosua1010101/three-months-papers.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yosua1010101/three-months-papers/issues"
+  },
+  "homepage": "https://github.com/yosua1010101/three-months-papers#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
