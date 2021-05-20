@@ -1,5 +1,5 @@
 import React from "react"
-import {Forms} from './Forms'
+import Forms from './Forms'
 
 class TitleScreen extends React.Component{
     render(){
