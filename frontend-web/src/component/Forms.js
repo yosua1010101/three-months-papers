@@ -1,5 +1,4 @@
 import React from 'react'
-
 class Forms extends React.Component{
     handleChange = (event) => {
 
@@ -13,10 +12,10 @@ class Forms extends React.Component{
         return(
             <form onSubmit="">
                 <input type="file" />
-                <a href="#" className="btn btn-primary btn-lg disabled" tabIndex="-1" role="button" aria-disabled="true">Primary link</a>
+                <button type="button" className="btn btn-primary disabled">Upload</button>
             </form>
         )
     }
 }
 
-export default Forms
+export default Forms;
