@@ -7,7 +7,7 @@ export default function FormPage() {
         setFile(document.querySelector('#fileInput').value)
     }
     function useAxios(params) {
-        //TODO : Implement Axios to send pdf file to backend
+        //TODO: Implement Axios to send pdf file to backend
     }
 
     return (
