@@ -2,6 +2,7 @@ import React from 'react'
 import Header from './common/Header'
 import Footer from './common/Footer'
 import TitleScreen from './common/TitleScreen'
+import FormPage from './input-form/FormPage'
 
 class PageContainer extends React.Component{
     render(){
@@ -9,6 +10,7 @@ class PageContainer extends React.Component{
             <>
                 <Header/>
                 <TitleScreen/>
+                <FormPage/>
                 <Footer/>
             </>
         )
