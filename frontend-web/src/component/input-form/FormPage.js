@@ -1,17 +1,15 @@
 import React, {useState} from 'react';
 
-export default function FormPage() {
+export default function FormPage(props) {
     const [file, setFile] = useState("")
+    var fileInput = document.querySelector('#fileInput')
 
     const handleFileChange = () => {
-        setFile(document.querySelector('#fileInput').value)
-    }
-    function useAxios(params) {
-        //TODO: Implement Axios to send pdf file to backend
+        setFile(fileInput.value)
     }
 
     return (
-        <form className="" onSubmit={useAxios()}>
+        <form className="" onSubmit={props.handleSectionChange}>
             <div className="d-grid gap-3 col-2 mx-auto">
                 <input type="file" id="fileInput" accept=".pdf,application/pdf" onChange={handleFileChange}/>
                 <br></br>
