@@ -4,10 +4,14 @@ const SummarySuggestion = () => {
     //TODO: Make the summary suggestion block
 }
 
-export default function ResultPage(quantity) {
+export default function ResultPage(props) {
     var summarySuggestions = []
-    for (var index=0 ; index < quantity ; index++){
+    for (var index=0 ; index < props.quantity ; index++){
         summarySuggestions.push(<SummarySuggestion/>)
     }
-    return summarySuggestions;
+    return (
+        <div className="d-grid col-1">
+            {summarySuggestions}
+        </div>
+        );
 }
