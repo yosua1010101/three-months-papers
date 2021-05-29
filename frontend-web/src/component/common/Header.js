@@ -3,7 +3,7 @@ export default function Header(){
         <header>
             <nav className="navbar navbar-expand navbar-light">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="#">SUMMARIZ-it</a>
+                    <button className="navbar-brand">SUMMARIZ-it</button>
                 </div>
             </nav>
         </header>
