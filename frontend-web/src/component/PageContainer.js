@@ -8,6 +8,7 @@ import axios from 'axios'
 
 export default function PageContainer() {
     const [section, setSection] = useState("form")
+    const [lists, setLists] = useState([])
     var fileInput = document.querySelector('#fileInput')
 
     const changeToResult = ()=> {
@@ -28,7 +29,7 @@ export default function PageContainer() {
         <>
             <Header/>
             <TitleScreen/>
-            {section === 'form' && <FormPage handleSectionChange={useAxios}/>}
+            {section === 'form' && <FormPage handleSectionChange={()=>useAxios}/>}
             {section === 'result' && <ResultPage quantity={0}/>}
             <Footer/>
         </>
