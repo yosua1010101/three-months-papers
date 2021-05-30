@@ -4,33 +4,26 @@ import Footer from './common/Footer'
 import TitleScreen from './common/TitleScreen'
 import FormPage from './input-form/FormPage'
 import ResultPage from './result-section/ResultPage'
-import axios from 'axios'
 
 export default function PageContainer() {
     const [section, setSection] = useState("form")
-    const [lists, setLists] = useState([])
-    var fileInput = document.querySelector('#fileInput')
+    const [list, setList] = useState([])
 
-    const changeToResult = ()=> {
-        setSection('result')
-    }
-
-    function useAxios() {
-        const data = new FormData()
-        data.append('file',fileInput.files[0])
-        axios.post("", data)
-             .then((response)=>{
-                 changeToResult()
-             },(error)=>{})
-             
+    const changeToResult = (event)=> {
+        event.preventDefault()
+        setList(["Lorem ipsum, dolor sit amet consectetur adipisicing elit",
+                 "Lorem ipsum, dolor sit amet consectetur adipisicing elit",
+                 "Lorem ipsum, dolor sit amet consectetur adipisicing elit",
+                 "Lorem ipsum, dolor sit amet consectetur adipisicing elit"]);
+        setSection('result');
     }
 
     return(
         <>
             <Header/>
             <TitleScreen/>
-            {section === 'form' && <FormPage handleSectionChange={()=>useAxios}/>}
-            {section === 'result' && <ResultPage quantity={0}/>}
+            {section === 'form' && <FormPage handleSectionChange={()=>changeToResult}/>}
+            {section === 'result' && <ResultPage list={list}/>}
             <Footer/>
         </>
     )

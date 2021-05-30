@@ -1,16 +1,20 @@
 import React from 'react'
 
-const SummarySuggestion = () => {
-    //TODO: Make the summary suggestion block
+const SummarySuggestion = ({element}) => {
+    return (<>
+        <div className="box row">
+            <p>{element}</p>
+        </div>
+    </>)
 }
 
-export default function ResultPage(props) {
+export default function ResultPage({list}) {
     var summarySuggestions = []
-    for (var index=0 ; index < props.quantity ; index++){
-        summarySuggestions.push(<SummarySuggestion/>)
-    }
+    list.forEach(element => {
+        summarySuggestions.push(<SummarySuggestion element={element}/>)
+    });
     return (
-        <div className="d-grid col-1">
+        <div className="container d-grid gap-5">
             {summarySuggestions}
         </div>
         );
