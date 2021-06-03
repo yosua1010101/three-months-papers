@@ -16,7 +16,7 @@ var BACKEND_URL = isLocalhost?"http://localhost:3001":"" //
 function App() {
   return (
     <>
-      <PageContainer apiUrl={BACKEND_URL + "/"}/>
+      <PageContainer apiUrl={BACKEND_URL + "/upload"}/>
     </>
   );
 }

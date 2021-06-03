@@ -1,10 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
+import axios from 'axios'
 
-export default function FormPage({handleSectionChange}) {
-  const [text, setText] = useState("")
+export default function FormPage({handleSectionChange, apiUrl}) {
+  const [text, setText] = React.useState('')
+
+  const handleSubmit = async(event)=>{
+    event.preventDefault()
+    const form = new FormData();
+    form.append('input',JSON.stringify({'value':text}))
+    const jsonbuf = await axios.post(apiUrl, form);
+    console.log(jsonbuf.data)
+    handleSectionChange(jsonbuf.data);
+  }
 
   return(
-    <form className="container d-grid gap-2" onSubmit={handleSectionChange()}>
+    <form className="container d-grid gap-2" onSubmit={handleSubmit}>
       <textarea 
         className="form-control" 
         rows="10" 

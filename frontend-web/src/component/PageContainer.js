@@ -4,18 +4,18 @@ import Footer from './common/Footer'
 import TitleScreen from './common/TitleScreen'
 import FormPage from './input-form/FormPage'
 import ResultPage from './result-section/ResultPage'
-import axios from 'axios'
+import ErrorRedirect from './error-section/ErrorRedirect'
+
 
 export default function PageContainer({apiUrl}) {
     const [section, setSection] = useState("form")
     const [list, setList] = useState([])
 
-    const changeToResult = (event)=> {
-        event.preventDefault()
-        setList(["Lorem ipsum, dolor sit amet consectetur adipisicing elit",
-                 "Lorem ipsum, dolor sit amet consectetur adipisicing elit",
-                 "Lorem ipsum, dolor sit amet consectetur adipisicing elit",
-                 "Lorem ipsum, dolor sit amet consectetur adipisicing elit"]); //should be an array from response body
+
+    const changeToResult = (jsonstr)=> {
+        let obj = jsonstr
+        let objList = Object.keys(obj).map((key)=>obj[key])
+        setList(objList); //should be an array from response body
         setSection('result');
     }
 
@@ -23,7 +23,8 @@ export default function PageContainer({apiUrl}) {
         <>
             <Header/>
             <TitleScreen/>
-            {section === 'form' && <FormPage handleSectionChange={()=>changeToResult}/>}
+            {section === 'form' && <FormPage handleSectionChange={(jsonbuf)=>changeToResult(jsonbuf)} apiUrl={apiUrl}/>}
+            {section === '400' && <ErrorRedirect/>}
             {section === 'result' && <ResultPage list={list}/>}
             <Footer/>
         </>
