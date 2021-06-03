@@ -2,9 +2,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var Multer = require('multer');
 var {format} = require('util');
+var fs = require('fs')
 var {Storage} = require('@google-cloud/storage');
+var cors = require('cors')
 
 const projectId = 'hiding-place-312704'
 const keyFilename = './credentials/hiding-place-312704-1d444180b02e.json'
@@ -13,16 +14,9 @@ const storage = new Storage({projectId, keyFilename})
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const { type } = require('os');
 
 var app = express();
-
-const uploadSingle = Multer({
-    storage: Multer.memoryStorage(),
-    limits: {
-        fileSize: 16*1024*1024
-    },
-    
-}).single('file');
 
 const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET)
 
@@ -31,29 +25,39 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors())
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.post("/upload", uploadSingle, (req,res,next)=>{
-    if (!req.file){
-        res.status(400).send('No file uploaded');
-        return
-    }
+app.post("/upload", (req,res,next)=>{
+    console.log(req.body)
+    const blob1 = bucket.file("input.json");
+    const blobWriteStream = blob1.createWriteStream();
 
-    const blob = bucket.file(req.file.originalname);
-    const blobStream = blob.createWriteStream();
+    blobWriteStream.on('error', err => {
+        next(err);
+    });
+    
+    blobWriteStream.end(req.body.input);
+    next();
+}, (req,res)=>{
+    const blob2 = bucket.file('output.json');
+    const blobReadStream = blob2.createReadStream();
+    var buf = ''
 
-    blobStream.on('error', err => {
+    blobReadStream.on('error', err =>{
         next(err);
     });
 
-    blobStream.on('finish', () => {
-        const publicUrl = format(`https://storage.googleapis.com/${bucket.name}/${blob.name}`);
-        res.status(200).send(publicUrl);
-    });
-    
-    blobStream.end(req.file.buffer);
+    blobReadStream.on('data', (d)=>{
+        buf += d
+    }).on('end',()=>{
+        console.log(typeof(buf))
+        console.log(buf);
+        console.log("End");
+        res.status(200).send(buf);
+    })
 });
 
 module.exports = app;
