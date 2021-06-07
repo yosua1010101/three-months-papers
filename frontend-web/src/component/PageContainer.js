@@ -15,7 +15,7 @@ export default function PageContainer({apiUrl}) {
     const changeToResult = (jsonstr)=> {
         let obj = jsonstr
         let objList = Object.keys(obj).map((key)=>obj[key])
-        setList(objList); //should be an array from response body
+        setList(objList);
         setSection('result');
     }
 

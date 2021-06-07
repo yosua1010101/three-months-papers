@@ -6,9 +6,16 @@ export default function FormPage({handleSectionChange, apiUrl}) {
 
   const handleSubmit = async(event)=>{
     event.preventDefault()
-    const form = new FormData();
-    form.append('input',JSON.stringify({'value':text}))
-    const jsonbuf = await axios.post(apiUrl, form);
+    // const form = new FormData();
+    // form.append('input',JSON.stringify({'value':text}))
+    // const jsonbuf = await axios.post(apiUrl, form);
+    const jsonbuf = await axios({
+      method:'post',
+      url:'https://asia-southeast2-hiding-place-312704.cloudfunctions.net/summarizer',
+      data:{
+        value:text
+      }
+    });
     console.log(jsonbuf.data)
     handleSectionChange(jsonbuf.data);
   }
