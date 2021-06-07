@@ -290,4 +290,5 @@ Thumbs.db
 .prof
 
 credentials/
+nltk_data/
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode
