@@ -23,7 +23,7 @@ export default function PageContainer({apiUrl}) {
         <>
             <Header/>
             <TitleScreen/>
-            {section === 'form' && <FormPage handleSectionChange={(jsonbuf)=>changeToResult(jsonbuf)} apiUrl={apiUrl}/>}
+            {section === 'form' && <FormPage handleSectionChange={(jsonbuf)=>changeToResult(jsonbuf)}/>}
             {section === '400' && <ErrorRedirect/>}
             {section === 'result' && <ResultPage list={list}/>}
             <Footer/>
